@@ -13,3 +13,5 @@ yarn-error.log
 .idea
 .idea/larabbs.iml
 .idea/php.xml
+.DS_Store
+public/.DS_Store
