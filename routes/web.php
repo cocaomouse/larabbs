@@ -49,3 +49,5 @@ Route::post('upload_image','TopicsController@uploadImage')->name('topics.upload_
 Route::get('/connection', function () {
     dd(app('redis.connection'));
 });
+
+Route::resource('replies', 'RepliesController', ['only' => ['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']]);
