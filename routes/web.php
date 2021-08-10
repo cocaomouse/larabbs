@@ -50,4 +50,4 @@ Route::get('/connection', function () {
     dd(app('redis.connection'));
 });
 
-Route::resource('replies', 'RepliesController', ['only' => ['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']]);
+Route::resource('replies', 'RepliesController', ['only' => ['store','destroy']]);
