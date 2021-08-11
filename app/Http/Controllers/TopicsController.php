@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Handlers\ImageUploadHandler;
 use App\Models\Category;
 use App\Models\Topic;
+use App\Models\Reply;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -21,13 +22,24 @@ class TopicsController extends Controller
     public function index(Request $request)
     {
         $topics = Topic::withOrder($request->order)
-            ->with('user', 'category')
+            ->with('user', 'category','replies')
             ->paginate(30);
+
+        foreach ($topics as $key=>$val) {
+            if(!$val->reply_count) {
+                $val->reply_count = count($val->replies);
+            }
+        }
+
         return view('topics.index', compact('topics'));
     }
 
     public function show(Request $request, Topic $topic)
     {
+        if (!$topic->reply_count) {
+            $topic->reply_count = $topic->replies->count();
+        }
+
         //URL矫正
         if (!empty($topic->slug) && $topic->slug != $request->slug) {
             return redirect($topic->link(), 301);
