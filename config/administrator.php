@@ -21,7 +21,7 @@ return array(
      *
      * @type string
      */
-    'title' => env('APP_NAME','Laravel'),
+    'title' => env('APP_NAME', 'Laravel'),
 
     /*
      * The path to your model config directory
@@ -68,6 +68,11 @@ return array(
             'categories',
             'topics',
             'replies',
+        ],
+        //需要注意的是此类后台，需要在菜单里使用 settings. 前缀，
+        //并且将文件放置于 settings_config_path 定义的目录中。
+        '站点管理' => [
+            'settings.site',
         ],
     ],
 
@@ -117,7 +122,7 @@ return array(
      *
      * 用来作为后台主页的菜单条目，由 `use_dashboard` 选项决定，菜单指的是 `menu` 选项
      */
-    'home_page' => 'users',
+    'home_page' => 'topics',
 
     /*
      * The route to which the user will be taken when they click the "back to site" button
@@ -135,7 +140,7 @@ return array(
      *
      * 当选项 `permission` 权限检测不通过时，会重定向用户到此处设置的路径
      */
-    'login_path' => 'login',
+    'login_path' => 'permission-denied', //permission-denied路由
 
     /*
      * The logout path is the path where Administrator will send the user when they click the logout link
