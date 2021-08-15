@@ -15,6 +15,8 @@ class PagesController extends Controller
     public function permissionDenied()
     {
         // 如果当前用户有权限访问后台，直接跳转访问
+        // config('administrator.permission')() 相当于调用permission()
+        // config->administrator->permission
         if (config('administrator.permission')()) {
             return redirect(url(config('administrator.uri')),302);
         }
