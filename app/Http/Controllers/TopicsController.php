@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TopicRequest;
+use App\Models\User;
 use Auth;
 
 class TopicsController extends Controller
@@ -19,11 +20,13 @@ class TopicsController extends Controller
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
 
-    public function index(Request $request)
+    public function index(Request $request,User $user)
     {
         $topics = Topic::withOrder($request->order)
             ->with('user', 'category','replies')
-            ->paginate(30);
+            ->paginate(20);
+
+        $active_users = $user->getActiveUsers();
 
         foreach ($topics as $key=>$val) {
             if(!$val->reply_count) {
@@ -31,7 +34,7 @@ class TopicsController extends Controller
             }
         }
 
-        return view('topics.index', compact('topics'));
+        return view('topics.index', compact('topics','active_users'));
     }
 
     public function show(Request $request, Topic $topic)
