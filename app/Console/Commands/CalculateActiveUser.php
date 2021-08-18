@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Models\User;
+use Log;
 
 class CalculateActiveUser extends Command
 {
@@ -38,11 +39,14 @@ class CalculateActiveUser extends Command
      */
     public function handle(User $user)
     {
+        Log::info('Begin calculate');
         // 在命令行打印一行信息
         $this->info("开始计算...");
 
         $user->calculateAndCacheActiveUsers();
 
         $this->info("成功生成!");
+
+        Log::info('Finished');
     }
 }
