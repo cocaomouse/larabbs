@@ -73,6 +73,7 @@ return array(
         //并且将文件放置于 settings_config_path 定义的目录中。
         '站点管理' => [
             'settings.site',
+            'links',
         ],
     ],
 

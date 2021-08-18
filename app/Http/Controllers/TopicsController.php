@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TopicRequest;
 use App\Models\User;
+use App\Models\Link;
 use Auth;
 
 class TopicsController extends Controller
@@ -20,7 +21,7 @@ class TopicsController extends Controller
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
 
-    public function index(Request $request,User $user)
+    public function index(Request $request,User $user,Link $link)
     {
         $topics = Topic::withOrder($request->order)
             ->with('user', 'category','replies')
@@ -28,13 +29,15 @@ class TopicsController extends Controller
 
         $active_users = $user->getActiveUsers();
 
+        $links = $link->getAllCached();
+
         foreach ($topics as $key=>$val) {
             if(!$val->reply_count) {
                 $val->reply_count = count($val->replies);
             }
         }
 
-        return view('topics.index', compact('topics','active_users'));
+        return view('topics.index', compact('topics','active_users','links'));
     }
 
     public function show(Request $request, Topic $topic)
