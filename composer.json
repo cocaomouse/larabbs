@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.3",
+        "doctrine/dbal": "^3.6",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
@@ -25,6 +26,7 @@
         "spatie/laravel-permission": "^4.2",
         "summerblue/administrator": "^8.0",
         "summerblue/laravel-active": "^8.0",
+        "tymon/jwt-auth": "^1.0",
         "viacreative/sudo-su": "^1.1"
     },
     "require-dev": {

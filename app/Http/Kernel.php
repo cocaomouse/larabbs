@@ -57,6 +57,9 @@ class Kernel extends HttpKernel
         // API 中间件组，应用于 routes/api.php 路由文件，
         // 在 RouteServiceProvider 中设定
         'api' => [
+            //
+            \App\Http\Middleware\AcceptHeader::class,
+
             // 使用别名来调用中间件
             // 请见：https://learnku.com/docs/laravel/8.x/middleware#为路由分配中间件
             'throttle:api',
@@ -83,5 +86,7 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        // 接口语言设置
+        'change-locale' => \App\Http\Middleware\ChangeLocale::class,
     ];
 }
