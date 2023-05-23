@@ -21,7 +21,7 @@ class AuthorizationsController extends Controller
     {
         $code = $request->code;
 
-        // 根据code获取微信openid和session_key
+        // 根据code获取微信openid和session_key(通过overtrue/laravel-wechat扩展包获取)
         $miniProgram = app('easywechat.mini_program');
         $data = $miniProgram->auth->session($code);
 
@@ -56,12 +56,16 @@ class AuthorizationsController extends Controller
 
             // 获取对应的用户
             $user = auth('api')->getUser();
-
-            // 为对应用户创建 JWT
-            $token = auth('api')->login($user);
-
-            return $this->respondWithToken($token)->setStatusCode(201);
         }
+
+        // 更新用户数据
+        $user->update($attributes);
+
+        // 为对应用户创建 JWT
+        $token = auth('api')->login($user);
+
+        return $this->respondWithToken($token)->setStatusCode(201);
+
     }
 
     protected function respondWithToken($token)
