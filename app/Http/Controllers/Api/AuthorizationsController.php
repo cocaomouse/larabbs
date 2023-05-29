@@ -65,7 +65,30 @@ class AuthorizationsController extends Controller
         $token = auth('api')->login($user);
 
         return $this->respondWithToken($token)->setStatusCode(201);
+    }
 
+    /**
+     * 小程序刷新token
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function update()
+    {
+        $token = auth('api')->refresh();
+        return $this->respondWithToken($token)->setStatusCode(201);
+    }
+
+    /**
+     * 小程序退出登录
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy()
+    {
+        auth('api')->logout();
+        return response()->json([
+            'message' => '已退出'
+        ])->setStatusCode(201);
     }
 
     protected function respondWithToken($token)
