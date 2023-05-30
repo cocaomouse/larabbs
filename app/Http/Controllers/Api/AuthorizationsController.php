@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Auth\AuthenticationException;
-use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 use App\Http\Requests\Api\WeappAuthorizationRequest;
 use App\Models\User;
+use Illuminate\Auth\AuthenticationException;
 
 class AuthorizationsController extends Controller
 {
@@ -75,6 +73,7 @@ class AuthorizationsController extends Controller
     public function update()
     {
         $token = auth('api')->refresh();
+
         return $this->respondWithToken($token)->setStatusCode(201);
     }
 
@@ -86,8 +85,9 @@ class AuthorizationsController extends Controller
     public function destroy()
     {
         auth('api')->logout();
+
         return response()->json([
-            'message' => '已退出'
+            'message' => '已退出',
         ])->setStatusCode(201);
     }
 
@@ -96,7 +96,7 @@ class AuthorizationsController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'Bearer',
-            'expires_in' => auth('api')->factory()->getTTL() * 60
+            'expires_in' => auth('api')->factory()->getTTL() * 60,
         ]);
     }
 }

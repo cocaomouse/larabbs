@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Topic;
+use Illuminate\Database\Seeder;
 
 class TopicsTableSeeder extends Seeder
 {
@@ -12,4 +12,3 @@ class TopicsTableSeeder extends Seeder
         Topic::factory()->count(100)->create();
     }
 }
-

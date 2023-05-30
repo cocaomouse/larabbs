@@ -27,6 +27,6 @@ return [
     |
      */
     //用户模型
-    'user_model' => App\Models\User::class
+    'user_model' => App\Models\User::class,
 
 ];

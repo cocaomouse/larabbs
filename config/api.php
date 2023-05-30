@@ -9,5 +9,5 @@ return [
         'access' => env('RATE_LIMITS', '60,1'),
         // 登录相关，次数/分钟
         'sign' => env('SIGN_RATE_LIMITS', '60,1'),
-    ]
+    ],
 ];

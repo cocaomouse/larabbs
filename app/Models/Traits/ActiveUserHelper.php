@@ -2,14 +2,9 @@
 
 namespace App\Models\Traits;
 
-use App\Models\Topic;
-use App\Models\Reply;
 use App\Models\User;
-use Carbon\Carbon;
 use Cache;
-use DB;
-use Arr;
-use Spatie\Permission\Models\Permission;
+use Carbon\Carbon;
 
 trait ActiveUserHelper
 {
@@ -56,10 +51,9 @@ trait ActiveUserHelper
         // 只获取我们想要的数量
         return collect($this->users)->sortByDesc(function ($user) {
             return $user['score'];
-        })->slice(0,$this->user_number)->map(function ($item) {
+        })->slice(0, $this->user_number)->map(function ($item) {
             return (object)$item; //将数组转换成对象，前端模版无需修改
         });
-
     }
 
     private function calculateTopicScore()
@@ -84,10 +78,10 @@ trait ActiveUserHelper
                 $this->users[$topic_user->id]['avatar'] = $topic_user->avatar;
                 $this->users[$topic_user->id]['name'] = $topic_user->name;
                 $this->users[$topic_user->id]['id'] = $topic_user->id;
+
                 return $this->users;
             });
         }
-
     }
 
     private function calculateReplyScore()
@@ -112,6 +106,7 @@ trait ActiveUserHelper
                 $this->users[$reply_user->id]['avatar'] = $reply_user->avatar;
                 $this->users[$reply_user->id]['name'] = $reply_user->name;
                 $this->users[$reply_user->id]['id'] = $reply_user->id;
+
                 return $this->users;
             });
         }

@@ -1,8 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
-use App\Http\Controllers\UsersController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,20 +37,20 @@ Route::get('email/verify', 'Auth\VerificationController@show')->name('verificati
 Route::get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify');
 Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
 
-Route::resource('users','UsersController',['only' => ['show','update','edit']]);
+Route::resource('users', 'UsersController', ['only' => ['show','update','edit']]);
 
 Route::resource('topics', 'TopicsController', ['only' => ['index', 'create', 'store', 'update', 'edit', 'destroy']]);
-Route::get('topics/{topic}/{slug?}','TopicsController@show')->name('topics.show');
+Route::get('topics/{topic}/{slug?}', 'TopicsController@show')->name('topics.show');
 
-Route::resource('categories','CategoriesController',['only' => 'show']);
+Route::resource('categories', 'CategoriesController', ['only' => 'show']);
 
-Route::post('upload_image','TopicsController@uploadImage')->name('topics.upload_image');
+Route::post('upload_image', 'TopicsController@uploadImage')->name('topics.upload_image');
 
 Route::get('/connection', function () {
     dd(app('redis.connection'));
 });
 
 Route::resource('replies', 'RepliesController', ['only' => ['store','destroy']]);
-Route::resource('notifications','NotificationsController',['only' => ['index']]);
+Route::resource('notifications', 'NotificationsController', ['only' => ['index']]);
 
-Route::get('permission-denied','PagesController@permissionDenied')->name('permission-denied');
+Route::get('permission-denied', 'PagesController@permissionDenied')->name('permission-denied');

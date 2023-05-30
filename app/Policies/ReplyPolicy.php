@@ -2,8 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\User;
 use App\Models\Reply;
+use App\Models\User;
 
 class ReplyPolicy extends Policy
 {

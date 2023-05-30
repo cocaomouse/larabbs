@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
      * Package URI
@@ -179,4 +179,4 @@ return array(
     'locales' => [],
 
     'custom_routes_file' => app_path('Http/routes/administrator.php'),
-);
+];

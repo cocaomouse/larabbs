@@ -4,8 +4,7 @@ return [
     'title' => '站点设置',
 
     // 访问权限判断
-    'permission'=> function()
-    {
+    'permission' => function () {
         // 只允许站长管理站点配置
         return Auth::user()->hasRole('Founder');
     },
@@ -51,8 +50,7 @@ return [
     ],
 
     // 数据即将保存时触发的钩子，可以对用户提交的数据做修改
-    'before_save' => function(&$data)
-    {
+    'before_save' => function (&$data) {
         // 为网站名称加上后缀，加上判断是为了防止多次添加
         if (strpos($data['site_name'], 'Powered by LaraBBS') === false) {
             $data['site_name'] .= ' - Powered by LaraBBS';
@@ -74,11 +72,11 @@ return [
             ],
 
             // 动作执行代码，注意你可以通过修改 $data 参数更改配置信息
-            'action' => function(&$data)
-            {
+            'action' => function (&$data) {
                 \Artisan::call('cache:clear');
+
                 return true;
-            }
+            },
         ],
     ],
 ];

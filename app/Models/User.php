@@ -2,19 +2,19 @@
 
 namespace App\Models;
 
+use Auth;
+use Illuminate\Auth\MustVerifyEmail as MustVerifyEmailTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Auth\MustVerifyEmail as MustVerifyEmailTrait;
-use Auth;
 use Spatie\Permission\Traits\HasRoles;
 use Tymon\JWTAuth\Contracts\JWTSubject;
-use Illuminate\Notifications\DatabaseNotification;
 
 class User extends Authenticatable implements MustVerifyEmailContract, JWTSubject
 {
-    use HasFactory, MustVerifyEmailTrait;
+    use HasFactory;
+    use MustVerifyEmailTrait;
 
     use Notifiable {
         notify as protected laravelNotify;
@@ -52,7 +52,7 @@ class User extends Authenticatable implements MustVerifyEmailContract, JWTSubjec
         'password',
         'remember_token',
         'weixin_openid',
-        'weixin_unionid'
+        'weixin_unionid',
     ];
 
     /**

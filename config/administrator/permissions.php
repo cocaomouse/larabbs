@@ -3,9 +3,9 @@
 use Spatie\Permission\Models\Permission;
 
 return [
-    'title'   => '权限',
-    'single'  => '权限',
-    'model'   => Permission::class,
+    'title' => '权限',
+    'single' => '权限',
+    'model' => Permission::class,
 
     'permission' => function () {
         return Auth::user()->can('manage_users');
@@ -36,10 +36,10 @@ return [
             'title' => 'ID',
         ],
         'name' => [
-            'title'    => '标示',
+            'title' => '标示',
         ],
         'operation' => [
-            'title'    => '管理',
+            'title' => '管理',
             'sortable' => false,
         ],
     ],
@@ -49,7 +49,7 @@ return [
             'title' => '标示（请慎重修改）',
 
             // 表单条目标题旁的『提示信息』
-            'hint' => '修改权限标识会影响代码的调用，请不要轻易更改。'
+            'hint' => '修改权限标识会影响代码的调用，请不要轻易更改。',
         ],
         'roles' => [
             'type' => 'relationship',

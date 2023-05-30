@@ -1,13 +1,11 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
-
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
+
+use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class SeedRolesAndPermissionsData extends Migration
 {

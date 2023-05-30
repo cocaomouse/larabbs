@@ -35,13 +35,13 @@ class SlugTranslateHandler
             "to" => "en",
             "appid" => $appid,
             "salt" => $salt,
-            "sign" => $sign
+            "sign" => $sign,
         ]);
 
         //发送HTTP Get请求
         $response = $http->get($api.$query);
 
-        $result = json_decode($response->getBody(),true);
+        $result = json_decode($response->getBody(), true);
 
         /**
         获取结果，如果请求成功，dd($result) 结果如下：
@@ -59,7 +59,7 @@ class SlugTranslateHandler
          **/
 
         // 尝试获取获取翻译结果
-        if(isset($result['trans_result'][0]['dst'])) {
+        if (isset($result['trans_result'][0]['dst'])) {
             return \Str::slug($result['trans_result'][0]['dst']);
         } else {
             // 如果百度翻译没有结果，使用拼音作为后备计划。

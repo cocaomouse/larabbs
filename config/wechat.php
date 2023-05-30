@@ -13,11 +13,11 @@ return [
     /*
      * 默认配置，将会合并到各模块中
      */
-    'defaults'         => [
+    'defaults' => [
         /*
          * 指定 API 调用返回结果的类型：array(default)/collection/object/raw/自定义类名
          */
-        'response_type'     => 'array',
+        'response_type' => 'array',
 
         /*
          * 使用 Laravel 的缓存系统
@@ -53,7 +53,7 @@ return [
     /*
      * 路由配置
      */
-    'route'            => [
+    'route' => [
         /*
          * 开放平台第三方平台路由配置
          */
@@ -72,9 +72,9 @@ return [
      */
     'official_account' => [
         'default' => [
-            'app_id'  => env('WECHAT_OFFICIAL_ACCOUNT_APPID', 'your-app-id'),         // AppID
-            'secret'  => env('WECHAT_OFFICIAL_ACCOUNT_SECRET', 'your-app-secret'),    // AppSecret
-            'token'   => env('WECHAT_OFFICIAL_ACCOUNT_TOKEN', 'your-token'),           // Token
+            'app_id' => env('WECHAT_OFFICIAL_ACCOUNT_APPID', 'your-app-id'),         // AppID
+            'secret' => env('WECHAT_OFFICIAL_ACCOUNT_SECRET', 'your-app-secret'),    // AppSecret
+            'token' => env('WECHAT_OFFICIAL_ACCOUNT_TOKEN', 'your-token'),           // Token
             'aes_key' => env('WECHAT_OFFICIAL_ACCOUNT_AES_KEY', ''),                 // EncodingAESKey
 
             /*
@@ -109,9 +109,9 @@ return [
      */
      'mini_program' => [
          'default' => [
-             'app_id'  => env('WECHAT_MINI_PROGRAM_APPID', ''),
-             'secret'  => env('WECHAT_MINI_PROGRAM_SECRET', ''),
-            'token'   => env('WECHAT_MINI_PROGRAM_TOKEN', ''),
+             'app_id' => env('WECHAT_MINI_PROGRAM_APPID', ''),
+             'secret' => env('WECHAT_MINI_PROGRAM_SECRET', ''),
+            'token' => env('WECHAT_MINI_PROGRAM_TOKEN', ''),
             'aes_key' => env('WECHAT_MINI_PROGRAM_AES_KEY', ''),
          ],
      ],

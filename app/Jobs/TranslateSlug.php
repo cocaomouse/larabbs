@@ -2,20 +2,21 @@
 
 namespace App\Jobs;
 
-use Carbon\Carbon;
+use App\Handlers\SlugTranslateHandler;
+use App\Models\Topic;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use App\Models\Topic;
-use App\Handlers\SlugTranslateHandler;
 use Illuminate\Support\Facades\DB;
 
 class TranslateSlug implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
 
     protected $topic;
 

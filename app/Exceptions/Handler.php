@@ -50,7 +50,7 @@ class Handler extends ExceptionHandler
             })->all(),
         ] : [
             'message' => $this->isHttpException($e) ? $e->getMessage() : 'Server Error',
-            'code' => $e->getCode()
+            'code' => $e->getCode(),
         ];
     }
 }

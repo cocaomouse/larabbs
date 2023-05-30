@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 class PagesController extends Controller
 {
     //
@@ -18,7 +16,7 @@ class PagesController extends Controller
         // config('administrator.permission')() 相当于调用permission()
         // config->administrator->permission
         if (config('administrator.permission')()) {
-            return redirect(url(config('administrator.uri')),302);
+            return redirect(url(config('administrator.uri')), 302);
         }
         // 否则使用视图
         return view('pages.permission_denied');

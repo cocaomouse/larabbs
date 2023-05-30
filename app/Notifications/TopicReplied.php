@@ -50,7 +50,7 @@ class TopicReplied extends Notification implements ShouldQueue
         //存入数据库表单data字段中的数组
         return [
             'reply_id' => $this->reply->id,
-            'reply_content'=> $this->reply->content,
+            'reply_content' => $this->reply->content,
             'user_id' => $this->reply->user->id,
             'user_name' => $this->reply->user->name,
             'user_avatar' => $this->reply->user->avatar,
@@ -70,7 +70,7 @@ class TopicReplied extends Notification implements ShouldQueue
     {
         $url = $this->reply->topic->link(['#reply'.$this->reply->id]);
 
-        return (new MailMessage)
+        return (new MailMessage())
             ->subject('测试邮件通知') //邮件通知的标题
             ->greeting('Hello!') //邮件开头招呼
             ->salutation('你好!') //邮件结尾招呼

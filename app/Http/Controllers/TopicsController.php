@@ -3,16 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Handlers\ImageUploadHandler;
-use App\Models\Category;
-use App\Models\Topic;
-use App\Models\Reply;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\TopicRequest;
-use App\Models\User;
+use App\Models\Category;
 use App\Models\Link;
+use App\Models\Topic;
+use App\Models\User;
 use Auth;
+use Illuminate\Http\Request;
 
 class TopicsController extends Controller
 {
@@ -21,23 +18,23 @@ class TopicsController extends Controller
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
 
-    public function index(Request $request,User $user,Link $link)
+    public function index(Request $request, User $user, Link $link)
     {
         $topics = Topic::withOrder($request->order)
-            ->with('user', 'category','replies')
+            ->with('user', 'category', 'replies')
             ->paginate(20);
 
         $active_users = $user->getActiveUsers();
 
         $links = $link->getAllCached();
 
-        foreach ($topics as $key=>$val) {
-            if(!$val->reply_count) {
+        foreach ($topics as $key => $val) {
+            if (!$val->reply_count) {
                 $val->reply_count = count($val->replies);
             }
         }
 
-        return view('topics.index', compact('topics','active_users','links'));
+        return view('topics.index', compact('topics', 'active_users', 'links'));
     }
 
     public function show(Request $request, Topic $topic)
@@ -57,6 +54,7 @@ class TopicsController extends Controller
     public function create(Topic $topic)
     {
         $categories = Category::all();
+
         return view('topics.create_and_edit', compact('topic', 'categories'));
     }
 
@@ -65,6 +63,7 @@ class TopicsController extends Controller
         $topic->fill($request->all());
         $topic->user_id = Auth::id();
         $topic->save();
+
         return redirect()->to($topic->link())->with('message', 'Created successfully.');
     }
 
@@ -72,6 +71,7 @@ class TopicsController extends Controller
     {
         $this->authorize('update', $topic);
         $categories = Category::all();
+
         return view('topics.create_and_edit', compact('topic', 'categories'));
     }
 
@@ -97,7 +97,7 @@ class TopicsController extends Controller
         $data = [
             'success' => false,
             'msg' => '上传失败',
-            'file_path' => ''
+            'file_path' => '',
         ];
         // 判断是否有上传文件，并赋值给 $file
         if ($file = $request->upload_file) {
@@ -110,6 +110,7 @@ class TopicsController extends Controller
                 $data['success'] = true;
             }
         }
+
         return $data;
     }
 }

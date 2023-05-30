@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\User;
-use App\Http\Requests\UserRequest;
 use App\Handlers\ImageUploadHandler;
+use App\Http\Requests\UserRequest;
+use App\Models\User;
 
 class UsersController extends Controller
 {
@@ -14,30 +13,31 @@ class UsersController extends Controller
     public function __construct()
     {
         //在 __construct 方法中调用了 middleware 方法，该方法接收两个参数，第一个为中间件的名称，第二个为要进行过滤的动作。
-        $this->middleware('auth',['except' => ['show']]);
+        $this->middleware('auth', ['except' => ['show']]);
     }
 
     //
     public function show(User $user)
     {
-        return view('users.show',compact('user'));
+        return view('users.show', compact('user'));
     }
 
     public function edit(User $user)
     {
         //authorize 方法接收两个参数，第一个为授权策略的名称，第二个为进行授权验证的数据。
-        $this->authorize('update',$user);
-        return view('users.edit',compact('user'));
+        $this->authorize('update', $user);
+
+        return view('users.edit', compact('user'));
     }
 
-    public function update(UserRequest $request,User $user,ImageUploadHandler $uploader)
+    public function update(UserRequest $request, User $user, ImageUploadHandler $uploader)
     {
         $this->authorize('update', $user);
 
         $data = $request->all();
 
         if ($request->avatar) {
-            $result = $uploader->save($request->avatar,'avatars',$user->id,$this->width);
+            $result = $uploader->save($request->avatar, 'avatars', $user->id, $this->width);
             if ($result) {
                 $data['avatar'] = $result['path'];
             }
@@ -45,6 +45,6 @@ class UsersController extends Controller
 
         $user->update($data);
 
-        return redirect()->route('users.show',$user->id)->with('success','个人资料更新成功!');
+        return redirect()->route('users.show', $user->id)->with('success', '个人资料更新成功!');
     }
 }

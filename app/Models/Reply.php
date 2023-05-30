@@ -12,11 +12,11 @@ class Reply extends Model
 
     public function topic()
     {
-        return $this->belongsTo('App\Models\Topic','topic_id','id');
+        return $this->belongsTo('App\Models\Topic', 'topic_id', 'id');
     }
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User','user_id','id');
+        return $this->belongsTo('App\Models\User', 'user_id', 'id');
     }
 }

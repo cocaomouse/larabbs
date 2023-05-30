@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Reply;
+use Illuminate\Database\Seeder;
 
 class RepliesTableSeeder extends Seeder
 {
@@ -12,4 +12,3 @@ class RepliesTableSeeder extends Seeder
         Reply::factory()->times(1000)->create();
     }
 }
-

@@ -2,8 +2,8 @@
 
 namespace App\Models\Traits;
 
-use Illuminate\Support\Facades\Redis;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Redis;
 
 trait LastActivedAtHelper
 {
@@ -26,7 +26,7 @@ trait LastActivedAtHelper
         $now = Carbon::now()->toDateTimeString();
 
         // 数据写入 Redis ，字段已存在会被更新
-        Redis::hset($hash,$field,$now);
+        Redis::hset($hash, $field, $now);
     }
 
     public function syncUserActivedAt()
@@ -42,7 +42,7 @@ trait LastActivedAtHelper
 
         //同步到数据库中
         foreach ($dates as $user_id => $actived_at) {
-            $user_id = str_replace($this->field_prefix,'',$user_id);
+            $user_id = str_replace($this->field_prefix, '', $user_id);
 
             // 只有当用户存在时才更新到数据库中
             $user = $this->find($user_id);
@@ -69,7 +69,7 @@ trait LastActivedAtHelper
         $field = $this->getHashField();
 
         // 三元运算符，优先选择 Redis 的数据，否则使用数据库中
-        $datetime = Redis::hGet($hash,$field) ? : $value;
+        $datetime = Redis::hGet($hash, $field) ?: $value;
 
         // 如果存在的话，返回时间对应的 Carbon 实体
         if ($datetime) {

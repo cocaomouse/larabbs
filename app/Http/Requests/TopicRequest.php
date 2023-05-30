@@ -6,8 +6,7 @@ class TopicRequest extends Request
 {
     public function rules()
     {
-        switch($this->method())
-        {
+        switch ($this->method()) {
             // CREATE
             case 'POST':
             // UPDATE
@@ -17,7 +16,7 @@ class TopicRequest extends Request
                 return [
                     'title' => 'required|min:2',
                     'body' => 'required|min:3',
-                    'category_id' => 'required|numeric'
+                    'category_id' => 'required|numeric',
                 ];
             }
             case 'GET':
