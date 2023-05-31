@@ -27,7 +27,7 @@ class CaptchasController extends Controller
 
         return response()->json([
             'captcha_key' => $key,
-            'captcha_code' => $captchaCode->inline(),
+            'captcha_image_content' => $captchaCode->inline(),
             'expired_at' => $expiredAt->toDateTimeString(),
         ]);
     }
