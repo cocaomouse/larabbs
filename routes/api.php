@@ -49,6 +49,8 @@ Route::prefix('v1')->namespace('Api')->middleware('change-locale')->name('api.v1
         Route::middleware('auth:api')->group(function () {
             // 当前登录用户信息
             Route::get('user', [UsersController::class,'me'])->name('user.show');
+            // 编辑登录用户信息
+            Route::put('user', [UsersController::class,'update'])->name('user.update');
         });
     });
 });
