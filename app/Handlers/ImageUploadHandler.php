@@ -3,12 +3,12 @@
 namespace App\Handlers;
 
 use Illuminate\Support\Str;
-use Image;
+use Intervention\Image\Facades\Image;
 
 class ImageUploadHandler
 {
     //限制文件后缀名
-    protected $alllowed_ext = ["png", "jpg", "jpeg", "gif"];
+    protected $allowed_ext = ["png", "jpg", "jpeg", "gif"];
 
     public function save($file, $folder, $file_prefix, $max_width = false)
     {
@@ -27,7 +27,7 @@ class ImageUploadHandler
         $filename = $file_prefix.'_'.time().'_'.Str::random(10).'.'.$extension;
 
         // 如果上传的不是图片将终止操作
-        if (!in_array($extension, $this->alllowed_ext)) {
+        if (!in_array($extension, $this->allowed_ext)) {
             return false;
         }
 
