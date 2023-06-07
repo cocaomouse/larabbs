@@ -2,9 +2,10 @@
 
 use App\Http\Controllers\Api\AuthorizationsController;
 use App\Http\Controllers\Api\CaptchasController;
+use App\Http\Controllers\Api\ImagesController;
+use App\Http\Controllers\Api\TopicsController;
 use App\Http\Controllers\Api\UsersController;
 use App\Http\Controllers\Api\VerificationCodesController;
-use App\Http\Controllers\Api\ImagesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,6 +47,11 @@ Route::prefix('v1')->namespace('Api')->middleware('change-locale')->name('api.v1
             ->name('authorizations.destroy');
     });
     Route::middleware('throttle:' . config('api.rate_limits.access'))->group(function () {
+        // 游客可以访问的接口
+        // 话题（列表 详情)
+        Route::resource('topics', TopicsController::class)->only(['index','show']);
+        /*Route::get('topics',[TopicsController::class,'index'])
+            ->name('topics.index');*/
         // 登录后可以访问的接口
         Route::middleware('auth:api')->group(function () {
             // 当前登录用户信息
