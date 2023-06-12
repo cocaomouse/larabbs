@@ -26,10 +26,10 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('v1')->namespace('Api')->middleware('change-locale')->name('api.v1.')->group(function () {
     Route::middleware('throttle:' . config('api.rate_limits.sign'))->group(function () {
         // 图片验证码
-        Route::post('captchas', [CaptchasController::class,'store'])
+        Route::post('captchas', [CaptchasController::class, 'store'])
             ->name('captchas.store');
         // 短信验证码
-        Route::post('verificationCodes', [VerificationCodesController::class,'store'])
+        Route::post('verificationCodes', [VerificationCodesController::class, 'store'])
             ->name('verificationCodes.store');
         // 登录
         Route::post('authorizations', [AuthorizationsController::class, 'store'])
@@ -38,13 +38,13 @@ Route::prefix('v1')->namespace('Api')->middleware('change-locale')->name('api.v1
         Route::post('weapp/authorizations', [AuthorizationsController::class, 'weappStore'])
             ->name('weapp.authorizations.store');
         // 小程序注册
-        Route::post('weapp/users', [UsersController::class,'weappStore'])
+        Route::post('weapp/users', [UsersController::class, 'weappStore'])
             ->name('weapp.users.store');
         // 刷新小程序登录token
         Route::put('authorizations/current', [AuthorizationsController::class, 'update'])
             ->name('authorizations.update');
         // 删除token 退出登录
-        Route::delete('authorizations/current', [AuthorizationsController::class,'destroy'])
+        Route::delete('authorizations/current', [AuthorizationsController::class, 'destroy'])
             ->name('authorizations.destroy');
     });
     Route::middleware('throttle:' . config('api.rate_limits.access'))->group(function () {
@@ -52,17 +52,18 @@ Route::prefix('v1')->namespace('Api')->middleware('change-locale')->name('api.v1
         // 话题（列表 详情)
         /* 使用资源类路由时报错？Target class [控制器名称] does not exist */
         //Route::resource('topics', TopicsController::class)->only(['index','show']);
-        Route::get('topics',[TopicsController::class,'index'])->name('topics.index');
+        Route::get('topics', [TopicsController::class, 'index'])->name('topics.index');
+        Route::get('topics/{id}', [TopicsController::class, 'show'])->name('topics.show');
         // 分类列表
-        Route::get('categories', [CategoriesController::class,'index'])->name('categories.index');
+        Route::get('categories', [CategoriesController::class, 'index'])->name('categories.index');
         // 登录后可以访问的接口
         Route::middleware('auth:api')->group(function () {
             // 当前登录用户信息
-            Route::get('user', [UsersController::class,'me'])->name('user.show');
+            Route::get('user', [UsersController::class, 'me'])->name('user.show');
             // 编辑登录用户信息
-            Route::put('user', [UsersController::class,'update'])->name('user.update');
+            Route::put('user', [UsersController::class, 'update'])->name('user.update');
             // 上传图片
-            Route::post('images', [ImagesController::class,'store'])->name('images.store');
+            Route::post('images', [ImagesController::class, 'store'])->name('images.store');
         });
     });
 });
