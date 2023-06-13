@@ -2,11 +2,11 @@
 
 use App\Http\Controllers\Api\AuthorizationsController;
 use App\Http\Controllers\Api\CaptchasController;
+use App\Http\Controllers\Api\CategoriesController;
 use App\Http\Controllers\Api\ImagesController;
 use App\Http\Controllers\Api\TopicsController;
 use App\Http\Controllers\Api\UsersController;
 use App\Http\Controllers\Api\VerificationCodesController;
-use App\Http\Controllers\Api\CategoriesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -56,6 +56,8 @@ Route::prefix('v1')->namespace('Api')->middleware('change-locale')->name('api.v1
         Route::get('topics/{id}', [TopicsController::class, 'show'])->name('topics.show');
         // 分类列表
         Route::get('categories', [CategoriesController::class, 'index'])->name('categories.index');
+        // 某个用户发表的话题列表
+        Route::get('users/{user}/topics', [TopicsController::class,'userIndex'])->name('users.topics.index');
         // 登录后可以访问的接口
         Route::middleware('auth:api')->group(function () {
             // 当前登录用户信息
