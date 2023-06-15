@@ -92,4 +92,16 @@ class UsersController extends Controller
 
         return (new UserResource($user))->showSensitiveFields();
     }
+
+    /**
+     * 用户详情
+     *
+     * @param User $user
+     * @param Request $request
+     * @return UserResource
+     */
+    public function show(User $user, Request $request)
+    {
+        return new UserResource($user);
+    }
 }

@@ -57,7 +57,9 @@ Route::prefix('v1')->namespace('Api')->middleware('change-locale')->name('api.v1
         // 分类列表
         Route::get('categories', [CategoriesController::class, 'index'])->name('categories.index');
         // 某个用户发表的话题列表
-        Route::get('users/{user}/topics', [TopicsController::class,'userIndex'])->name('users.topics.index');
+        Route::get('users/{user}/topics', [TopicsController::class, 'userIndex'])->name('users.topics.index');
+        // 用户详情
+        Route::get('users/{user}', [UsersController::class, 'show'])->name('users.show');
         // 登录后可以访问的接口
         Route::middleware('auth:api')->group(function () {
             // 当前登录用户信息
@@ -66,6 +68,8 @@ Route::prefix('v1')->namespace('Api')->middleware('change-locale')->name('api.v1
             Route::put('user', [UsersController::class, 'update'])->name('user.update');
             // 上传图片
             Route::post('images', [ImagesController::class, 'store'])->name('images.store');
+            // 删除发表的话题
+            Route::delete('topics/{topic}', [TopicsController::class, 'destroy'])->name('topics.destroy');
         });
     });
 });
