@@ -75,6 +75,8 @@ Route::prefix('v1')->namespace('Api')->middleware('change-locale')->name('api.v1
             Route::post('images', [ImagesController::class, 'store'])->name('images.store');
             // 删除发表的话题
             Route::delete('topics/{topic}', [TopicsController::class, 'destroy'])->name('topics.destroy');
+            // 发布回复
+            Route::post('topics/{topic}/replies', [RepliesController::class,'store'])->name('topics.replies.store');
         });
     });
 });
