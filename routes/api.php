@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AuthorizationsController;
 use App\Http\Controllers\Api\CaptchasController;
 use App\Http\Controllers\Api\CategoriesController;
 use App\Http\Controllers\Api\ImagesController;
+use App\Http\Controllers\Api\RepliesController;
 use App\Http\Controllers\Api\TopicsController;
 use App\Http\Controllers\Api\UsersController;
 use App\Http\Controllers\Api\VerificationCodesController;
@@ -60,6 +61,8 @@ Route::prefix('v1')->namespace('Api')->middleware('change-locale')->name('api.v1
         Route::get('users/{user}/topics', [TopicsController::class, 'userIndex'])->name('users.topics.index');
         // 用户详情
         Route::get('users/{user}', [UsersController::class, 'show'])->name('users.show');
+        // 话题回复列表
+        Route::get('topics/{topic}/replies', [RepliesController::class,'index'])->name('topics.replies.index');
         // 登录后可以访问的接口
         Route::middleware('auth:api')->group(function () {
             // 当前登录用户信息
