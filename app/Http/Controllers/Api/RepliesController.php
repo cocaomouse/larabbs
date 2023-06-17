@@ -21,4 +21,18 @@ class RepliesController extends Controller
 
         return ReplyResource::collection($replies);
     }
+
+    /**
+     * 某个用户的回复列表
+     *
+     * @param $userId
+     * @param ReplyQuery $query
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
+    public function userIndex($userId, ReplyQuery $query)
+    {
+        $replies = $query->where('user_id', $userId)->paginate();
+
+        return ReplyResource::collection($replies);
+    }
 }
