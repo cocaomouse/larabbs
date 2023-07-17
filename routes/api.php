@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\RepliesController;
 use App\Http\Controllers\Api\TopicsController;
 use App\Http\Controllers\Api\UsersController;
 use App\Http\Controllers\Api\VerificationCodesController;
+use App\Http\Controllers\Api\NotificationsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -77,6 +78,10 @@ Route::prefix('v1')->namespace('Api')->middleware('change-locale')->name('api.v1
             Route::delete('topics/{topic}', [TopicsController::class, 'destroy'])->name('topics.destroy');
             // 发布回复
             Route::post('topics/{topic}/replies', [RepliesController::class,'store'])->name('topics.replies.store');
+            // 通知列表
+            Route::get('notifications',[NotificationsController::class,'index'])->name('notifications.index');
+            // 通知统计
+            Route::get('notifications/stats',[NotificationsController::class,'stats'])->name('notifications.state');
         });
     });
 });
