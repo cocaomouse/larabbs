@@ -81,7 +81,11 @@ Route::prefix('v1')->namespace('Api')->middleware('change-locale')->name('api.v1
             // 通知列表
             Route::get('notifications',[NotificationsController::class,'index'])->name('notifications.index');
             // 通知统计
-            Route::get('notifications/stats',[NotificationsController::class,'stats'])->name('notifications.state');
+            Route::get('notifications/stats',[NotificationsController::class,'stats'])
+                ->name('notifications.state');
+            // 标记消息通知为已读
+            Route::put('user/read/notifications',[NotificationsController::class,'read'])
+                ->name('user.notifications.read');
         });
     });
 });
